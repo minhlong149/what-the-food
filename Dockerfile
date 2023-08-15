@@ -22,4 +22,12 @@ COPY /server .
 
 COPY --from=builder /app/dist ./web
 
-CMD ["go", "run", "cmd/server/main.go"]
+RUN go build -o /usr/bin/app cmd/server/main.go
+
+FROM alpine:3
+
+COPY --from=server /usr/bin/app /usr/bin/app
+
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/bin/app"]
