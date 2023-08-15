@@ -1,0 +1,6 @@
+[submodule "app"]
+	path = app
+	url = https://github.com/minhlong149/wtfood-app.git
+[submodule "server"]
+	path = server
+	url = https://github.com/minhlong149/wtfood-server
