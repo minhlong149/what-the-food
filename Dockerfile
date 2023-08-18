@@ -24,10 +24,12 @@ COPY --from=builder /app/dist ./web
 
 RUN go build -o /usr/bin/app cmd/server/main.go
 
-FROM alpine:3
+FROM alpine:3 as production
 
 COPY --from=server /usr/bin/app /usr/bin/app
 
+COPY --from=builder /app/dist ./web
+
 EXPOSE 8080
 
-ENTRYPOINT ["/usr/bin/app"]
+CMD ["/usr/bin/app"]
